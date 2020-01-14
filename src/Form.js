@@ -1,47 +1,57 @@
 import React, {useState} from 'react'
 import './main.css'
 
-const Form = ({addTodos,isEditing, setIsEditing,text}) => {
+const Form = ({addTodos,isEditing, setIsEditing,editDone,editTodo}) => {
 
     const [value, setValue] = useState(``)
 
+    const [editValue, setEditValue] = useState('')
+
+    //リストを追加
     const hundleSubmit = (e) => {
         e.preventDefault()
         addTodos(value)
         setValue('')
     }
 
-    // const hundleEditSubmit = (e) => {
-    //     e.preventDefault()
-    // }
-
-    console.log(text)
-
-
+    //リストを編集
+    const hundleEditSubmit = (e) => {
+        e.preventDefault()
+        editDone(editValue)
+        setIsEditing(!isEditing)
+        setEditValue('')
+    }
 
     return (
     <form 
         className='form' 
-        onSubmit={hundleSubmit}
+        onSubmit={
+            isEditing ?
+            hundleEditSubmit:
+            hundleSubmit
+        }
     >
         <input  
             className='input' 
             type="text" 
-            onChange = {(e) => {setValue(e.target.value)}}
+            onChange = {
+                isEditing ?
+                (e) => {setEditValue(e.target.value)}:
+                (e) => {setValue(e.target.value)}
+            }
             value = {
                 isEditing ?
-                value:
-                text
+                editValue:
+                value
             }
         />
-        <button className='addInput' type="submit" onClick={() =>{
-                setIsEditing(!isEditing)
-            }} >{
-            isEditing ?
-            'edit':
-            'add'
-            }
-            </button>
+        <button className='addInput' type="submit">
+        {
+        isEditing ?
+        'edit':
+        'add'
+        } 
+        </button>
     </form>
     )
 }

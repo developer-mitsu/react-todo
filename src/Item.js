@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const Item = ({content, id,removeTodos,isEditing, setIsEditing,editTodos}) => {
+const Item = ({content, id,removeTodos,createEditTodo,isEditing, setIsEditing,editTodos}) => {
 
     //React.useStateを実行すると
     //最新の状態の値
@@ -11,20 +11,15 @@ const Item = ({content, id,removeTodos,isEditing, setIsEditing,editTodos}) => {
                             {textDecorationLine: 'line-through'}:
                             null
 
-    // const [isEditing, setIsEditing] =React.useState(false)
-
-
     const removeclick = () => {
-        // e.preventDefault(){}
         removeTodos(id)
-        // setValue('')
     }
 
     const editClick = () => {
-        editTodos(content)
+        setIsEditing(!isEditing)
+        createEditTodo(content,id)
     }
 
-    
                             
     return (
         <Listwrap>
@@ -35,9 +30,8 @@ const Item = ({content, id,removeTodos,isEditing, setIsEditing,editTodos}) => {
             <span style={doneLine}>{`${id}: ${content}`}</span>
             </LeftContents>
             <RightContents>
-            <EditButton　onClick={() =>{
-                setIsEditing(!isEditing)
-            }} onClick={editClick}
+            <EditButton 
+            onClick={editClick}
             >edit</EditButton>
             <DeleteButton onClick={removeclick}>delete</DeleteButton>
             </RightContents>

@@ -2,7 +2,7 @@ import React from 'react'
 import Item from './Item'
 import styled from 'styled-components'
 
-const List = ({todos,removeTodos,isEditing, setIsEditing,editTodos}) => {
+const List = ({todos,removeTodos,isEditing, setIsEditing,editTodos,createEditTodo,editDone}) => {
 
 
 
@@ -16,9 +16,11 @@ const List = ({todos,removeTodos,isEditing, setIsEditing,editTodos}) => {
                         id={i}
                         key={i}
                         removeTodos={removeTodos}
+                        createEditTodo={createEditTodo}
                         isEditing={isEditing}
                         setIsEditing={setIsEditing}
-                        editTodos={editTodos}
+                        // editTodos={editTodos}
+                        
                         />
                     )
 
